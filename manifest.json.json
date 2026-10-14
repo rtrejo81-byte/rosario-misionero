@@ -1,0 +1,26 @@
+{
+  "name": "Rosario Misionero del Mundo",
+  "short_name": "Rosario Misionero",
+  "description": "Guía interactiva del Rosario Misionero del Mundo - Pastoral Familiar",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdf6e3",
+  "theme_color": "#1e3a8a",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Rosario Misionero del Mundo</title>
+<meta name="theme-color" content="#1e3a8a">
+<meta name="description" content="Rosario Misionero del Mundo - Pastoral Familiar">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icono-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rosario Misionero">
+
+<style>
+  :root {
+    --azul: #1e3a8a;
+    --azul-claro: #3b82f6;
+    --crema: #fdf6e3;
+    --dorado: #d4a017;
+    --verde: #16a34a;
+    --rojo: #dc2626;
+    --blanco: #ffffff;
+    --amarillo: #eab308;
+    --gris-texto: #374151;
+    --gris-suave: #6b7280;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    overscroll-behavior-y: contain;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, sans-serif;
+    background: var(--crema);
+    color: var(--gris-texto);
+    line-height: 1.6;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- HEADER CON IMAGEN DE FONDO ---------- */
+  header {
+    position: relative;
+    background-image: url('fondo-rosario.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--blanco);
+    text-align: center;
+    padding: calc(50px + env(safe-area-inset-top, 0px)) 20px 45px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(30, 58, 138, 0.72),
+      rgba(59, 130, 246, 0.45)
+    );
+    z-index: 1;
+  }
+
+  header h1, header p, header .logo-mini {
+    position: relative;
+    z-index: 2;
+  }
+
+  header h1 {
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
+    letter-spacing: 0.3px;
+  }
+
+  header p {
+    font-style: italic;
+    font-size: 1.05rem;
+    opacity: 0.98;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.55);
+  }
+
+  /* ---------- BOTÓN INSTALAR APP ---------- */
+  #btn-instalar {
+    display: none;
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--azul);
+    color: var(--blanco);
+    border: none;
+    padding: 14px 26px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.45);
+    cursor: pointer;
+    animation: pulse 2s infinite;
+  }
+
+  #btn-instalar:active { transform: translateX(-50%) scale(0.96); }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 20px rgba(30, 58, 138, 0.45); }
+    50% { box-shadow: 0 6px 28px rgba(30, 58, 138, 0.75); }
+  }
+
+  /* ---------- CONTENEDOR ---------- */
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  /* ---------- TARJETAS ---------- */
+  .card {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 6px solid var(--azul);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card:active {
+    transform: scale(0.985);
+  }
+
+  .card:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .card h2 {
+    font-size: 1.15rem;
+    color: var(--azul);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card > p {
+    font-size: 0.95rem;
+    color: var(--gris-suave);
+  }
+
+  .card .contenido {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+    opacity: 0;
+  }
+
+  .card.abierto .contenido {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed #d1d5db;
+  }
+
+  /* ---------- LISTA INTENCIONES ---------- */
+  ul.lista-intenciones {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul.lista-intenciones li {
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background: #f9fafb;
+    font-size: 0.92rem;
+  }
+
+  ul.lista-intenciones li strong {
+    display: inline-block;
+    min-width: 85px;
+  }
+
+  /* ---------- BOTÓN ---------- */
+  .btn {
+    display: inline-block;
+    background: var(--azul);
+    color: var(--blanco);
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn:hover { background: var(--azul-claro); }
+  .btn:active { transform: scale(0.97); }
+
+  /* ---------- VIDEO ---------- */
+  .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--gris-suave);
+    padding: 24px 16px 40px;
+    font-style: italic;
+  }
+
+  .emoji { font-size: 1.3rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 Rosario Misionero del Mundo</h1>
+  <p>Una sola fe, una sola familia, una misma misión</p>
+</header>
+
+<div class="container">
+
+  <!-- CÓMO REZAR -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="emoji">🕊️</span> Cómo rezar</h2>
+    <p>Toca para ver la guía paso a paso</p>
+    <div class="contenido">
+      <ol style="padding-left: 20px;">
+        <li>Comienza con la Señal de la Cruz.</li>
+        <li>Reza el Credo, un Padre Nuestro y tres Avemarías.</li>
+        <li>En cada decena, menciona la intención del continente que te toca.</li>
+        <li>Reza un Padre Nuestro, diez Avemarías y un Gloria.</li>
+        <li>Al terminar las cinco decenas, reza la Oración final.</li>
+      </ol>
+      <p style="margin-top:10px;"><strong>Consejo:</strong> Pueden turnarse para dirigir cada decena.</p>
+    </div>
+  </div>
+
+  <!-- INTENCIONES -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="emoji">🙏</span> Intenciones por continente</h2>
+    <p>Los cinco colores del Rosario Misionero</p>
+    <div class="contenido">
+      <ul class="lista-intenciones">
+        <li style="border-left: 4px solid var(--verde);"><strong>Verde:</strong> África — Por la paz y la esperanza de sus pueblos.</li>
+        <li style="border-left: 4px solid var(--rojo);"><strong>Rojo:</strong> América — Por la unidad y la fe de las familias.</li>
+        <li style="border-left: 4px solid var(--amarillo);"><strong>Amarillo:</strong> Asia — Por los que aún no conocen a Cristo.</li>
+        <li style="border-left: 4px solid #ffffff; box-shadow: inset 0 0 0 1px #d1d5db;"><strong>Blanco:</strong> Europa — Por la renovación de la fe.</li>
+        <li style="border-left: 4px solid #2563eb;"><strong>Azul:</strong> Oceanía — Por los misioneros en las islas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- VIDEOS -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="emoji">🎥</span> Videos y testimonios</h2>
+    <p>Mira cómo otras familias lo viven</p>
+    <div class="contenido">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      </div>
+      <p style="margin-top:8px; font-size:0.85rem; color:#6b7280;">Reemplaza el enlace por el video de tu pastoral.</p>
+    </div>
+  </div>
+
+  <!-- ORACIÓN FINAL -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="emoji">❤️</span> Oración final</h2>
+    <p>Para cerrar el Rosario Misionero</p>
+    <div class="contenido">
+      <p style="font-style: italic;">
+        "Señor Jesús, que nos enviaste a anunciar el Evangelio a todo el mundo,<br>
+        te pedimos por la intercesión de María,<br>
+        que nuestras familias sean misioneras en casa y fuera de ella.<br>
+        Amén."
+      </p>
+    </div>
+  </div>
+
+  <!-- MATERIALES -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="emoji">📤</span> Materiales para compartir</h2>
+    <p>Descarga el separador y otros recursos</p>
+    <div class="contenido">
+      <p>Aquí puedes enlazar tu Google Drive con el PDF del separador, imágenes para redes y más.</p>
+      <a href="#" class="btn">📄 Descargar separador (PDF)</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  El mundo necesita nuestras oraciones…<br>
+  ¡y nuestra familia también! 🤍✝️
+</footer>
+
+<!-- Botón de instalación PWA -->
+<button id="btn-instalar">📲 Instalar app</button>
+
+<script>
+  // ---- Acordeón de tarjetas ----
+  function toggle(el) {
+    el.classList.toggle('abierto');
+  }
+
+  // ---- Registro del Service Worker ----
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('SW registrado:', reg.scope))
+        .catch(err => console.error('Error SW:', err));
+    });
+  }
+
+  // ---- Botón de instalación PWA ----
+  let deferredPrompt;
+  const btnInstalar = document.getElementById('btn-instalar');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    btnInstalar.style.display = 'block';
+  });
+
+  btnInstalar.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log('Resultado instalación:', outcome);
+    deferredPrompt = null;
+    btnInstalar.style.display = 'none';
+  });
+
+  window.addEventListener('appinstalled', () => {
+    console.log('App instalada');
+    btnInstalar.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
