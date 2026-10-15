@@ -65,7 +65,7 @@
     background-repeat: no-repeat;
     color: var(--text-primary);
     text-align: center;
-    padding: calc(60px + env(safe-area-inset-top, 0px)) 20px 50px;
+    padding: calc(30px + env(safe-area-inset-top, 0px)) 20px 50px;
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -78,8 +78,8 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(11, 17, 32, 0.75) 0%,
-      rgba(11, 17, 32, 0.92) 100%
+      rgba(11, 17, 32, 0.78) 0%,
+      rgba(11, 17, 32, 0.94) 100%
     );
     z-index: 1;
   }
@@ -89,6 +89,22 @@
     z-index: 2;
     max-width: 600px;
     margin: 0 auto;
+  }
+
+  /* Logo de la Pastoral */
+  .hero-logo {
+    display: block;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 14px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+    animation: logoFloat 4s ease-in-out infinite;
+  }
+
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
   }
 
   header .badge {
@@ -172,6 +188,8 @@
     margin-bottom: 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .misterio-header .tag {
@@ -188,6 +206,7 @@
     font-size: 1.3rem;
     color: var(--accent-gold);
     margin-bottom: 12px;
+    transition: color 0.4s ease;
   }
 
   .continent-indicator {
@@ -201,6 +220,7 @@
     margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
+    transition: border-color 0.4s ease;
   }
 
   .continent-dot {
@@ -208,7 +228,43 @@
     height: 12px;
     border-radius: 50%;
     box-shadow: 0 0 10px currentColor;
-    transition: background 0.4s ease, color 0.4s ease;
+    transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  /* ---------- INDICADOR DE PASO ---------- */
+  .step-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.4s ease;
+    color: var(--text-secondary);
+  }
+
+  .step-indicator.pn {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.4);
+    color: var(--accent-gold);
+  }
+
+  .step-indicator.gloria {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--bead-active-color, rgba(255,255,255,0.3));
+    color: var(--bead-active-color, var(--text-primary));
+  }
+
+  .step-indicator.completed {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
   }
 
   /* ---------- ROSARIO SVG ---------- */
@@ -219,7 +275,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Ajusta un poco el espacio vertical */
     aspect-ratio: 1 / 1;
   }
 
@@ -248,14 +303,21 @@
     transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
   }
 
-  /* Cuenta Padre Nuestro base (un poco más marcada) */
   .bead-pn {
     fill: rgba(255, 255, 255, 0.13);
     stroke: rgba(245, 158, 11, 0.35);
     stroke-width: 1.6;
   }
 
-  /* Cuenta activa — color dinámico vía variable CSS */
+  /* Cuenta ya rezada */
+  .bead-svg.done {
+    fill: var(--bead-done-color, rgba(255,255,255,0.25));
+    stroke: var(--bead-done-color, rgba(255,255,255,0.4));
+    filter: none;
+    animation: none;
+  }
+
+  /* Cuenta activa */
   .bead-svg.active {
     fill: var(--bead-active-color, var(--accent-gold));
     stroke: var(--bead-active-color, var(--accent-gold));
@@ -263,36 +325,67 @@
             drop-shadow(0 0 12px var(--bead-active-color, var(--accent-gold)));
   }
 
-  /* Cuenta Padre Nuestro activa brilla un poco más */
   .bead-pn.active {
     filter: drop-shadow(0 0 8px var(--bead-active-color, var(--accent-gold)))
             drop-shadow(0 0 16px var(--bead-active-color, var(--accent-gold)))
             drop-shadow(0 0 24px var(--bead-active-color, var(--accent-gold)));
   }
 
-  /* Medalla central (cruz / corazón) */
+  /* Medalla base */
   .medal {
-    fill: rgba(245, 158, 11, 0.18);
-    stroke: var(--accent-gold);
+    fill: rgba(255, 255, 255, 0.06);
+    stroke: rgba(255, 255, 255, 0.25);
     stroke-width: 1.8;
     transition: fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease;
   }
 
   .medal-cross {
-    stroke: var(--accent-gold);
+    stroke: rgba(255, 255, 255, 0.35);
     stroke-width: 2.2;
     stroke-linecap: round;
     fill: none;
     transition: stroke 0.4s ease;
   }
 
-  /* Cruz colgando en la cola (pequeña) */
-  .tail-cross {
+  /* Medalla activa (Gloria) */
+  .medal.active {
+    fill: var(--bead-active-color, var(--accent-gold));
+    stroke: var(--bead-active-color, var(--accent-gold));
+    filter: drop-shadow(0 0 8px var(--bead-active-color, var(--accent-gold)))
+            drop-shadow(0 0 16px var(--bead-active-color, var(--accent-gold)))
+            drop-shadow(0 0 24px var(--bead-active-color, var(--accent-gold)));
+  }
+
+  .medal-cross.active {
+    stroke: #0b1120;
+    stroke-width: 2.4;
+  }
+
+  /* Medalla final (completado) — dorada con glow */
+  .medal.final {
+    fill: var(--accent-gold);
     stroke: var(--accent-gold);
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    fill: none;
-    opacity: 0.85;
+    filter: drop-shadow(0 0 10px var(--accent-gold))
+            drop-shadow(0 0 20px var(--accent-gold))
+            drop-shadow(0 0 30px var(--accent-gold));
+    animation: beadPulseGold 2s ease-in-out infinite;
+  }
+
+  .medal-cross.final {
+    stroke: #0b1120;
+    stroke-width: 2.4;
+  }
+
+  @keyframes beadPulseGold {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px var(--accent-gold))
+              drop-shadow(0 0 16px var(--accent-gold));
+    }
+    50% {
+      filter: drop-shadow(0 0 14px var(--accent-gold))
+              drop-shadow(0 0 28px var(--accent-gold))
+              drop-shadow(0 0 40px var(--accent-gold));
+    }
   }
 
   /* ---------- CONTROLES ---------- */
@@ -327,7 +420,7 @@
     box-shadow: none;
   }
 
-  /* Leyenda del rosario */
+  /* Leyenda */
   .rosary-legend {
     display: flex;
     justify-content: center;
@@ -350,6 +443,7 @@
     border-radius: 50%;
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.3);
+    transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   }
 
   .legend-dot.big {
@@ -359,10 +453,149 @@
   }
 
   .legend-dot.glow {
-    background: var(--accent-gold);
-    box-shadow: 0 0 8px var(--accent-gold);
-    border-color: var(--accent-gold);
+    background: var(--bead-active-color, var(--accent-gold));
+    box-shadow: 0 0 8px var(--bead-active-color, var(--accent-gold));
+    border-color: var(--bead-active-color, var(--accent-gold));
   }
+
+  .legend-dot.done {
+    background: rgba(255,255,255,0.35);
+    border-color: rgba(255,255,255,0.5);
+    box-shadow: none;
+  }
+
+  /* ---------- MODAL FINAL ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 17, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-card {
+    background: linear-gradient(160deg, rgba(20, 28, 48, 0.98) 0%, rgba(11, 17, 32, 0.98) 100%);
+    border: 1.5px solid rgba(245, 158, 11, 0.5);
+    border-radius: 28px;
+    padding: 32px 24px 28px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 60px rgba(245, 158, 11, 0.15);
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-overlay.show .modal-card {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .modal-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 16px rgba(245, 158, 11, 0.5));
+    animation: logoFloat 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-trophy {
+    font-size: 3rem;
+    margin-bottom: 8px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    animation: trophyBounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes trophyBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-8px) scale(1.08); }
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .modal-text strong {
+    color: var(--text-primary);
+  }
+
+  .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-modal {
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .btn-modal.primary {
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
+    color: #0b1120;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+  }
+
+  .btn-modal.secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+  }
+
+  .btn-modal:active { transform: scale(0.96); }
 
   /* ---------- TARJETAS ---------- */
   .card {
@@ -528,8 +761,31 @@
   /* Ajustes móviles pequeños */
   @media (max-width: 380px) {
     header h1 { font-size: 1.9rem; }
+    .hero-logo { width: 90px; height: 90px; }
     .rosary-svg-wrap { max-width: 320px; }
     .btn-action { padding: 11px 18px; font-size: 0.88rem; }
+    .modal-card { padding: 26px 18px 22px; }
+    .modal-title { font-size: 1.45rem; }
+  }
+
+  @keyframes beadPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 6px var(--bead-active-color, var(--accent-gold)))
+              drop-shadow(0 0 12px var(--bead-active-color, var(--accent-gold)));
+    }
+    50% {
+      filter: drop-shadow(0 0 10px var(--bead-active-color, var(--accent-gold)))
+              drop-shadow(0 0 20px var(--bead-active-color, var(--accent-gold)))
+              drop-shadow(0 0 30px var(--bead-active-color, var(--accent-gold)));
+    }
+  }
+
+  .bead-svg.active {
+    animation: beadPulse 2s ease-in-out infinite;
+  }
+
+  .medal.active {
+    animation: beadPulse 2s ease-in-out infinite;
   }
 </style>
 </head>
@@ -537,6 +793,7 @@
 
 <header>
   <div class="hero-content">
+    <img src="https://i.imgur.com/b4BdXzJ.png" alt="Logo Pastoral Familiar" class="hero-logo">
     <span class="badge">Pastoral Familiar</span>
     <h1>Rosario Misionero</h1>
     <p>Una sola fe, una sola familia, una misma misión global</p>
@@ -564,38 +821,34 @@
       <span id="continente-nombre">África (Verde)</span>
     </div>
 
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;" id="misterio-desc">
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;" id="misterio-desc">
       Oremos por la paz, la esperanza y la dignidad de los pueblos africanos.
     </p>
 
-    <!-- ROSARIO EN SVG -->
+    <div class="step-indicator" id="step-indicator">Padre Nuestro</div>
+
     <div class="rosary-svg-wrap">
       <svg class="rosary-svg" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg" aria-label="Rosario misionero interactivo">
-        <!-- Hilo del rosario (anillo + cola) -->
         <path id="rosary-thread-path" class="rosary-thread" d="" />
-
-        <!-- Grupo de cuentas generadas por JS -->
         <g id="beads-layer"></g>
-
-        <!-- Medalla / cruz colgante al final de la cola -->
         <g id="medal-group" transform="translate(150, 305)">
-          <circle class="medal" r="12" />
-          <line class="medal-cross" x1="0" y1="-7" x2="0" y2="7" />
-          <line class="medal-cross" x1="-5" y1="-2" x2="5" y2="-2" />
+          <circle id="medal-circle" class="medal" r="12" />
+          <line id="medal-cross-v" class="medal-cross" x1="0" y1="-7" x2="0" y2="7" />
+          <line id="medal-cross-h" class="medal-cross" x1="-5" y1="-2" x2="5" y2="-2" />
         </g>
       </svg>
     </div>
 
-    <!-- Leyenda -->
     <div class="rosary-legend">
       <span><span class="legend-dot big"></span> Padre Nuestro</span>
       <span><span class="legend-dot"></span> Avemaría</span>
-      <span><span class="legend-dot glow"></span> Cuenta activa</span>
+      <span><span class="legend-dot done"></span> Rezada</span>
+      <span><span class="legend-dot glow" id="legend-active"></span> Activa</span>
     </div>
 
     <div class="player-controls">
-      <button class="btn-action btn-secondary" onclick="prevBead()">Anterior</button>
-      <button class="btn-action" onclick="nextBead()">Avanzar Cuenta 📿</button>
+      <button class="btn-action btn-secondary" onclick="prevStep()">Anterior</button>
+      <button class="btn-action" id="btn-next" onclick="nextStep()">Rezar Avemarías 📿</button>
     </div>
   </div>
 
@@ -738,6 +991,24 @@
   El mundo necesita nuestras oraciones… ¡y nuestra familia también! 🤍✝️
 </footer>
 
+<!-- MODAL FINAL -->
+<div class="modal-overlay" id="modal-fin">
+  <div class="modal-card">
+    <img src="https://i.imgur.com/b4BdXzJ.png" alt="Logo Pastoral Familiar" class="modal-logo">
+    <span class="modal-trophy">🙏✨</span>
+    <h2 class="modal-title">¡Rosario Completado!</h2>
+    <p class="modal-text">
+      Has rezado las <strong>5 decenas</strong> del Rosario Misionero del Mundo,<br>
+      uniendo tu corazón con las familias de <strong>África, América, Asia, Europa y Oceanía</strong>.<br><br>
+      Que María, Reina de las Misiones, interceda por cada rincón de la Tierra. 🤍
+    </p>
+    <div class="modal-buttons">
+      <button class="btn-modal primary" onclick="cerrarModalYReiniciar()">Rezar de Nuevo 📿</button>
+      <button class="btn-modal secondary" onclick="cerrarModal()">Ver Rosario Completo</button>
+    </div>
+  </div>
+</div>
+
 <button id="btn-instalar">📲 Instalar App</button>
 
 <script>
@@ -748,35 +1019,27 @@
   /* ============================================================
      GEOMETRÍA DEL ROSARIO
      ============================================================ */
-  const CX = 150;          // centro X del anillo
-  const CY = 150;          // centro Y del anillo
-  const RX = 105;          // radio X (óvalo)
-  const RY = 118;          // radio Y (óvalo)
+  const CX = 150;
+  const CY = 150;
+  const RX = 105;
+  const RY = 118;
 
-  // Cuentas del anillo: 5 grupos de (1 PN + 10 Ave) = 55 cuentas
-  // El anillo empieza en la parte inferior (6 en punto) y va en sentido horario.
-  // Vamos a construir la lista completa de cuentas del anillo con su tipo.
-  const beadsRing = []; // {tipo: 'pn'|'ave', decena: 0-4, indexInDecena: 0-9}
-
+  const beadsRing = [];
   for (let d = 0; d < 5; d++) {
-    beadsRing.push({ tipo: 'pn', decena: d, idx: -1 }); // Padre Nuestro inicia cada decena
+    beadsRing.push({ tipo: 'pn', decena: d, idx: -1 });
     for (let i = 0; i < 10; i++) {
       beadsRing.push({ tipo: 'ave', decena: d, idx: i });
     }
   }
-  // beadsRing.length === 55
 
-  // La cola: 1 PN grande + 3 Avemarías + medalla
   const beadsTail = [
-    { tipo: 'pn', decena: -1, idx: -1 }, // cuenta PN inicial
+    { tipo: 'pn', decena: -1, idx: -1 },
     { tipo: 'ave', decena: -1, idx: 0 },
     { tipo: 'ave', decena: -1, idx: 1 },
     { tipo: 'ave', decena: -1, idx: 2 }
   ];
 
-  // Ángulo inicial: parte inferior del óvalo (90° en SVG = abajo)
   const ANGLE_START = Math.PI / 2;
-  // Dirección horaria → restamos ángulo
   const ANGLE_STEP = -(2 * Math.PI) / beadsRing.length;
 
   function getRingPosition(i) {
@@ -787,25 +1050,22 @@
     };
   }
 
-  // Posición de las cuentas de la cola (bajan desde la parte inferior del anillo)
   const tailPositions = [
-    { x: CX, y: CY + RY + 28 },  // PN inicial
+    { x: CX, y: CY + RY + 28 },
     { x: CX, y: CY + RY + 48 },
     { x: CX, y: CY + RY + 66 },
     { x: CX, y: CY + RY + 84 }
   ];
 
-  /* ============================================================
-     CONSTRUCCIÓN DEL SVG
-     ============================================================ */
   const beadsLayer = document.getElementById('beads-layer');
   const threadPath = document.getElementById('rosary-thread-path');
+  const medalCircle = document.getElementById('medal-circle');
+  const medalCrossV = document.getElementById('medal-cross-v');
+  const medalCrossH = document.getElementById('medal-cross-h');
 
-  // Guardamos referencias a los elementos SVG de cada cuenta
-  const beadElements = []; // {el, tipo, decena, idx}
+  const beadElements = [];
 
   function buildRosary() {
-    // --- Hilo del anillo (óvalo) ---
     let dRing = '';
     for (let i = 0; i <= beadsRing.length; i++) {
       const p = getRingPosition(i % beadsRing.length);
@@ -813,18 +1073,14 @@
     }
     dRing += 'Z ';
 
-    // --- Hilo de la cola: baja desde la parte inferior del anillo ---
-    // La parte inferior del anillo está en (CX, CY+RY). Conectamos al PN inicial de la cola.
     let dTail = `M ${CX} ${CY + RY} `;
     tailPositions.forEach(p => {
       dTail += `L ${p.x} ${p.y} `;
     });
-    // Y de la última cuenta de la cola a la medalla
-    dTail += `L ${CX} ${305 - 14} `; // hasta el borde superior de la medalla
+    dTail += `L ${CX} ${305 - 14} `;
 
     threadPath.setAttribute('d', dRing + dTail);
 
-    // --- Cuentas del anillo ---
     beadsRing.forEach((b, i) => {
       const p = getRingPosition(i);
       const r = b.tipo === 'pn' ? 6.5 : 4.2;
@@ -833,14 +1089,10 @@
       circle.setAttribute('cy', p.y.toFixed(2));
       circle.setAttribute('r', r);
       circle.setAttribute('class', 'bead-svg' + (b.tipo === 'pn' ? ' bead-pn' : ''));
-      circle.dataset.decena = b.decena;
-      circle.dataset.tipo = b.tipo;
-      circle.dataset.idx = b.idx;
       beadsLayer.appendChild(circle);
       beadElements.push({ el: circle, tipo: b.tipo, decena: b.decena, idx: b.idx, zona: 'ring' });
     });
 
-    // --- Cuentas de la cola ---
     beadsTail.forEach((b, i) => {
       const p = tailPositions[i];
       const r = b.tipo === 'pn' ? 6.5 : 4.2;
@@ -849,9 +1101,6 @@
       circle.setAttribute('cy', p.y.toFixed(2));
       circle.setAttribute('r', r);
       circle.setAttribute('class', 'bead-svg' + (b.tipo === 'pn' ? ' bead-pn' : ''));
-      circle.dataset.decena = b.decena;
-      circle.dataset.tipo = b.tipo;
-      circle.dataset.idx = b.idx;
       beadsLayer.appendChild(circle);
       beadElements.push({ el: circle, tipo: b.tipo, decena: b.decena, idx: b.idx, zona: 'tail' });
     });
@@ -860,20 +1109,19 @@
   buildRosary();
 
   /* ============================================================
-     LÓGICA DE PROGRESO
-     - currentDecena: 0-4
-     - currentBead: 0-10  (0 = aún no se reza ninguna Avemaría; 1-10 = Avemarías rezadas)
-       Nota: la cuenta PN se considera "activa" cuando empieza la decena.
+     LÓGICA DE PASOS
      ============================================================ */
   let currentDecena = 0;
-  let currentBead = 0;
+  let step = 0;
+  let completado = false;
+  const MAX_STEP = 11;
 
   const continentes = [
-    { nombre: "África (Verde)", color: "var(--verde)", desc: "Oremos por la paz, la esperanza y la dignidad de los pueblos africanos." },
-    { nombre: "América (Rojo)", color: "var(--rojo)", desc: "Oremos por la unidad de las familias y el fortalecimiento de la fe en América." },
-    { nombre: "Asia (Amarillo)", color: "var(--amarillo)", desc: "Oremos por aquellos que aún no conocen a Cristo y por los pueblos de Asia." },
-    { nombre: "Europa (Blanco)", color: "var(--blanco)", desc: "Oremos por la renovación de la fe cristiana y la paz en el continente europeo." },
-    { nombre: "Oceanía (Azul)", color: "var(--azul)", desc: "Oremos por las comunidades cristianas y los misioneros en las islas de Oceanía." }
+    { nombre: "África (Verde)", colorRaw: "#22c55e", desc: "Oremos por la paz, la esperanza y la dignidad de los pueblos africanos." },
+    { nombre: "América (Rojo)", colorRaw: "#ef4444", desc: "Oremos por la unidad de las familias y el fortalecimiento de la fe en América." },
+    { nombre: "Asia (Amarillo)", colorRaw: "#eab308", desc: "Oremos por aquellos que aún no conocen a Cristo y por los pueblos de Asia." },
+    { nombre: "Europa (Blanco)", colorRaw: "#f8fafc", desc: "Oremos por la renovación de la fe cristiana y la paz en el continente europeo." },
+    { nombre: "Oceanía (Azul)", colorRaw: "#3b82f6", desc: "Oremos por las comunidades cristianas y los misioneros en las islas de Oceanía." }
   ];
 
   const misteriosSemana = {
@@ -886,81 +1134,191 @@
     6: "Misterios Gozosos (Sábado)"
   };
 
+  function getStepLabel() {
+    if (completado) return "Rosario Completado ✨";
+    if (step === 0) return "Padre Nuestro";
+    if (step >= 1 && step <= 10) return `Avemaría ${step} de 10`;
+    return "Gloria";
+  }
+
+  function getButtonLabel() {
+    if (completado) return "Rezar de Nuevo 📿";
+    if (step === 0) return "Rezar Avemarías 📿";
+    if (step >= 1 && step <= 9) return "Siguiente Avemaría";
+    if (step === 10) return "Rezar Gloria ✨";
+    if (currentDecena < 4) return "Siguiente Continente 🌍";
+    return "Finalizar Rosario 🙏";
+  }
+
+  function isBeadDone(b) {
+    if (completado) return b.zona === 'ring'; // todo el anillo queda coloreado
+    if (b.zona !== 'ring') return false;
+    if (b.decena < currentDecena) return true;
+    if (b.decena > currentDecena) return false;
+    if (b.tipo === 'pn') return step > 0;
+    return step > b.idx + 1;
+  }
+
+  function isBeadActive(b) {
+    if (completado) return false;
+    if (b.zona !== 'ring') return false;
+    if (b.decena !== currentDecena) return false;
+    if (step === 0 && b.tipo === 'pn') return true;
+    if (step >= 1 && step <= 10 && b.tipo === 'ave' && b.idx === step - 1) return true;
+    return false;
+  }
+
   function updateUI() {
     const today = new Date().getDay();
     document.getElementById('dia-semana').innerText = misteriosSemana[today];
-    document.getElementById('misterio-titulo').innerText = `Decena ${currentDecena + 1}`;
-    document.getElementById('progreso-texto').innerText = `${currentDecena + 1} / 5 Decena`;
+    document.getElementById('misterio-titulo').innerText = completado ? "¡Misión Cumplida!" : `Decena ${currentDecena + 1}`;
+    document.getElementById('progreso-texto').innerText = completado ? "5 / 5 Completado ✓" : `${currentDecena + 1} / 5 Decena`;
 
     const cont = continentes[currentDecena];
-    document.getElementById('continente-nombre').innerText = cont.nombre;
-    document.getElementById('misterio-desc').innerText = cont.desc;
+    document.getElementById('continente-nombre').innerText = completado ? "Mundo Entero 🌍" : cont.nombre;
+    document.getElementById('misterio-desc').innerText = completado
+      ? "Has rezado por los cinco continentes. Que la paz de Cristo llegue a cada rincón de la Tierra."
+      : cont.desc;
 
     const dot = document.getElementById('continente-color');
-    dot.style.background = cont.color;
-    dot.style.color = cont.color;
+    if (completado) {
+      dot.style.background = "var(--accent-gold)";
+      dot.style.color = "var(--accent-gold)";
+    } else {
+      dot.style.background = cont.colorRaw;
+      dot.style.color = cont.colorRaw;
+    }
 
-    // Propagar el color activo al rosario SVG
     const svg = document.querySelector('.rosary-svg');
-    svg.style.setProperty('--bead-active-color', cont.color);
+    svg.style.setProperty('--bead-active-color', cont.colorRaw);
+    document.documentElement.style.setProperty('--bead-active-color', cont.colorRaw);
 
-    // Iluminar cuentas según el progreso
-    // Decena activa = currentDecena
-    // PN de esa decena se ilumina siempre que estemos en esa decena
-    // Avemarías 0..currentBead-1 se iluminan
+    const stepInd = document.getElementById('step-indicator');
+    stepInd.innerText = getStepLabel();
+    stepInd.classList.remove('pn', 'gloria', 'completed');
+    if (completado) stepInd.classList.add('completed');
+    else if (step === 0) stepInd.classList.add('pn');
+    else if (step === 11) stepInd.classList.add('gloria');
+
+    document.getElementById('btn-next').innerText = getButtonLabel();
+
+    // Reset cuentas
     beadElements.forEach(b => {
-      let activa = false;
+      b.el.classList.remove('active', 'done');
+      b.el.style.removeProperty('--bead-done-color');
+    });
+    medalCircle.classList.remove('active', 'final');
+    medalCrossV.classList.remove('active', 'final');
+    medalCrossH.classList.remove('active', 'final');
 
-      if (b.zona === 'ring') {
-        if (b.decena === currentDecena) {
-          if (b.tipo === 'pn') {
-            activa = true; // el PN de la decena activa siempre encendido
-          } else if (b.tipo === 'ave') {
-            activa = b.idx < currentBead;
-          }
-        }
-        // Si ya pasamos esa decena, la dejamos apagada (para enfatizar la actual)
-        // Si aún no llegamos, apagada.
-      } else if (b.zona === 'tail') {
-        // La cola solo se ilumina al final (opcional: cuando se complete todo)
-        // La dejamos apagada por ahora.
-        activa = false;
-      }
-
-      if (activa) {
+    // Aplicar estados
+    beadElements.forEach(b => {
+      if (isBeadActive(b)) {
         b.el.classList.add('active');
-      } else {
-        b.el.classList.remove('active');
+      } else if (isBeadDone(b)) {
+        const colorPropio = continentes[b.decena] ? continentes[b.decena].colorRaw : continentes[0].colorRaw;
+        b.el.style.setProperty('--bead-done-color', colorPropio);
+        b.el.classList.add('done');
       }
     });
+
+    // Medalla
+    if (completado) {
+      medalCircle.classList.add('final');
+      medalCrossV.classList.add('final');
+      medalCrossH.classList.add('final');
+    } else if (step === 11) {
+      medalCircle.classList.add('active');
+      medalCrossV.classList.add('active');
+      medalCrossH.classList.add('active');
+    }
+
+    // Cola: al completar, colorearla como decorativa dorada
+    if (completado) {
+      beadElements.forEach(b => {
+        if (b.zona === 'tail') {
+          b.el.style.setProperty('--bead-done-color', '#f59e0b');
+          b.el.classList.add('done');
+        }
+      });
+    }
   }
 
-  function nextBead() {
-    if (currentBead < 10) {
-      currentBead++;
+  function nextStep() {
+    if (completado) {
+      // Reiniciar
+      completado = false;
+      currentDecena = 0;
+      step = 0;
+      updateUI();
+      return;
+    }
+
+    if (step < MAX_STEP) {
+      step++;
     } else {
-      currentBead = 0;
       if (currentDecena < 4) {
         currentDecena++;
+        step = 0;
       } else {
-        currentDecena = 0;
-        alert("¡Has completado las 5 decenas del Rosario Misionero! 🙏✨");
+        // FINAL
+        completado = true;
+        updateUI();
+        abrirModal();
+        return;
       }
     }
     updateUI();
   }
 
-  function prevBead() {
-    if (currentBead > 0) {
-      currentBead--;
+  function prevStep() {
+    if (completado) {
+      completado = false;
+      updateUI();
+      return;
+    }
+    if (step > 0) {
+      step--;
     } else if (currentDecena > 0) {
       currentDecena--;
-      currentBead = 10;
+      step = 11;
     }
     updateUI();
   }
 
-  // Inicializar UI
+  /* ============================================================
+     MODAL
+     ============================================================ */
+  const modal = document.getElementById('modal-fin');
+
+  function abrirModal() {
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 400);
+  }
+
+  function cerrarModal() {
+    modal.classList.remove('show');
+    // Al cerrar de esta forma, mantenemos el rosario iluminado en estado "completado"
+  }
+
+  function cerrarModalYReiniciar() {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      completado = false;
+      currentDecena = 0;
+      step = 0;
+      updateUI();
+    }, 300);
+  }
+
+  // Cerrar modal al tocar el fondo oscuro
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+  });
+
   updateUI();
 
   /* ============================================================
