@@ -4,59 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Rosario Misionero del Mundo</title>
-<meta name="theme-color" content="#1e3a8a">
-<meta name="description" content="Rosario Misionero del Mundo - Pastoral Familiar">
+<meta name="theme-color" content="#0b1120">
+<meta name="description" content="Rosario Misionero del Mundo - Guía Interactiva para Jóvenes y Familias">
 
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icono-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Rosario Misionero">
+
+<!-- Fuentes Google -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --azul: #1e3a8a;
-    --azul-claro: #3b82f6;
-    --crema: #fdf6e3;
-    --dorado: #d4a017;
-    --verde: #16a34a;
-    --rojo: #dc2626;
-    --blanco: #ffffff;
+    --bg-dark: #0b1120;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-gold: #f59e0b;
+    --accent-glow: rgba(245, 158, 11, 0.3);
+    
+    /* Colores Misioneros */
+    --verde: #22c55e;
+    --rojo: #ef4444;
     --amarillo: #eab308;
-    --gris-texto: #374151;
-    --gris-suave: #6b7280;
+    --blanco: #f8fafc;
+    --azul: #3b82f6;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-  html, body {
-    height: 100%;
-    overscroll-behavior-y: contain;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Tahoma, sans-serif;
-    background: var(--crema);
-    color: var(--gris-texto);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
     line-height: 1.6;
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-    -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom, 30px);
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.12) 0%, transparent 40%);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 
-  /* ---------- HEADER CON IMAGEN DE FONDO ---------- */
+  /* ---------- HEADER HERO ---------- */
   header {
     position: relative;
     background-image: url('fondo-rosario.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: var(--blanco);
+    color: var(--text-primary);
     text-align: center;
-    padding: calc(50px + env(safe-area-inset-top, 0px)) 20px 45px;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    padding: calc(60px + env(safe-area-inset-top, 0px)) 20px 50px;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     overflow: hidden;
   }
 
@@ -65,283 +77,901 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      135deg,
-      rgba(30, 58, 138, 0.72),
-      rgba(59, 130, 246, 0.45)
+      180deg,
+      rgba(11, 17, 32, 0.75) 0%,
+      rgba(11, 17, 32, 0.92) 100%
     );
     z-index: 1;
   }
 
-  header h1, header p, header .logo-mini {
+  header .hero-content {
     position: relative;
     z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  header .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 50px;
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    backdrop-filter: blur(8px);
   }
 
   header h1 {
-    font-size: 1.9rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 800;
     margin-bottom: 10px;
-    font-weight: 700;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-    letter-spacing: 0.3px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.5);
   }
 
   header p {
-    font-style: italic;
-    font-size: 1.05rem;
-    opacity: 0.98;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.55);
-  }
-
-  /* ---------- BOTÓN INSTALAR APP ---------- */
-  #btn-instalar {
-    display: none;
-    position: fixed;
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    background: var(--azul);
-    color: var(--blanco);
-    border: none;
-    padding: 14px 26px;
-    border-radius: 50px;
     font-size: 1rem;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.45);
-    cursor: pointer;
-    animation: pulse 2s infinite;
+    color: var(--text-secondary);
+    font-weight: 400;
   }
 
-  #btn-instalar:active { transform: translateX(-50%) scale(0.96); }
-
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 6px 20px rgba(30, 58, 138, 0.45); }
-    50% { box-shadow: 0 6px 28px rgba(30, 58, 138, 0.75); }
-  }
-
-  /* ---------- CONTENEDOR ---------- */
+  /* ---------- CONTENEDOR PRINCIPAL ---------- */
   .container {
-    max-width: 540px;
+    max-width: 580px;
     margin: 0 auto;
     padding: 24px 16px;
   }
 
-  /* ---------- TARJETAS ---------- */
-  .card {
-    background: var(--blanco);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border-left: 6px solid var(--azul);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-    user-select: none;
+  /* ---------- BANNER IMAGEN DESTACADA ---------- */
+  .image-banner {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
 
-  .card:active {
-    transform: scale(0.985);
+  .image-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .image-banner:hover img {
+    transform: scale(1.02);
+  }
+
+  /* ---------- REPRODUCTOR INTERACTIVO DEL ROSARIO ---------- */
+  .rosary-player {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 20px 16px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    text-align: center;
+  }
+
+  .misterio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .misterio-header .tag {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--azul);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .misterio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--accent-gold);
+    margin-bottom: 12px;
+  }
+
+  .continent-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+  }
+
+  .continent-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  /* ---------- ROSARIO SVG ---------- */
+  .rosary-svg-wrap {
+    width: 100%;
+    max-width: 380px;
+    margin: 8px auto 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ajusta un poco el espacio vertical */
+    aspect-ratio: 1 / 1;
+  }
+
+  .rosary-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
+  }
+
+  /* Hilo del rosario */
+  .rosary-thread {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Cuentas base (apagadas) */
+  .bead-svg {
+    fill: rgba(255, 255, 255, 0.10);
+    stroke: rgba(255, 255, 255, 0.22);
+    stroke-width: 1.2;
+    transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
+  }
+
+  /* Cuenta Padre Nuestro base (un poco más marcada) */
+  .bead-pn {
+    fill: rgba(255, 255, 255, 0.13);
+    stroke: rgba(245, 158, 11, 0.35);
+    stroke-width: 1.6;
+  }
+
+  /* Cuenta activa — color dinámico vía variable CSS */
+  .bead-svg.active {
+    fill: var(--bead-active-color, var(--accent-gold));
+    stroke: var(--bead-active-color, var(--accent-gold));
+    filter: drop-shadow(0 0 6px var(--bead-active-color, var(--accent-gold)))
+            drop-shadow(0 0 12px var(--bead-active-color, var(--accent-gold)));
+  }
+
+  /* Cuenta Padre Nuestro activa brilla un poco más */
+  .bead-pn.active {
+    filter: drop-shadow(0 0 8px var(--bead-active-color, var(--accent-gold)))
+            drop-shadow(0 0 16px var(--bead-active-color, var(--accent-gold)))
+            drop-shadow(0 0 24px var(--bead-active-color, var(--accent-gold)));
+  }
+
+  /* Medalla central (cruz / corazón) */
+  .medal {
+    fill: rgba(245, 158, 11, 0.18);
+    stroke: var(--accent-gold);
+    stroke-width: 1.8;
+    transition: fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease;
+  }
+
+  .medal-cross {
+    stroke: var(--accent-gold);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    fill: none;
+    transition: stroke 0.4s ease;
+  }
+
+  /* Cruz colgando en la cola (pequeña) */
+  .tail-cross {
+    stroke: var(--accent-gold);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    fill: none;
+    opacity: 0.85;
+  }
+
+  /* ---------- CONTROLES ---------- */
+  .player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn-action {
+    background: linear-gradient(135deg, var(--azul) 0%, #1d4ed8 100%);
+    color: var(--blanco);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .btn-action:active { transform: scale(0.96); }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border: 1px solid var(--card-border);
+    box-shadow: none;
+  }
+
+  /* Leyenda del rosario */
+  .rosary-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+  }
+
+  .rosary-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .legend-dot.big {
+    width: 14px;
+    height: 14px;
+    border-color: rgba(245, 158, 11, 0.6);
+  }
+
+  .legend-dot.glow {
+    background: var(--accent-gold);
+    box-shadow: 0 0 8px var(--accent-gold);
+    border-color: var(--accent-gold);
+  }
+
+  /* ---------- TARJETAS ---------- */
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
   }
 
   .card:hover {
-    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
   }
 
   .card h2 {
-    font-size: 1.15rem;
-    color: var(--azul);
-    margin-bottom: 6px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    font-weight: 700;
+  }
+
+  .card h2 span.icon {
+    font-size: 1.3rem;
   }
 
   .card > p {
-    font-size: 0.95rem;
-    color: var(--gris-suave);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
   }
 
   .card .contenido {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
     opacity: 0;
   }
 
   .card.abierto .contenido {
-    max-height: 2000px;
+    max-height: 2500px;
     opacity: 1;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px dashed #d1d5db;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* ---------- LISTA INTENCIONES ---------- */
-  ul.lista-intenciones {
+  /* ---------- GUÍA MISTERIOS Y DÍAS ---------- */
+  .misterio-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .misterio-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .misterio-box-title {
+    font-weight: 700;
+    color: var(--accent-gold);
+    font-size: 0.98rem;
+  }
+
+  .misterio-days {
+    font-size: 0.75rem;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--accent-gold);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  .misterio-list {
     list-style: none;
     padding-left: 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
   }
 
-  ul.lista-intenciones li {
-    padding: 10px 12px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    background: #f9fafb;
-    font-size: 0.92rem;
+  .misterio-list li {
+    margin-bottom: 4px;
+    display: flex;
+    gap: 8px;
   }
 
-  ul.lista-intenciones li strong {
-    display: inline-block;
-    min-width: 85px;
+  .misterio-list li span.num {
+    color: var(--azul);
+    font-weight: 700;
   }
 
-  /* ---------- BOTÓN ---------- */
-  .btn {
-    display: inline-block;
-    background: var(--azul);
-    color: var(--blanco);
-    padding: 12px 22px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 10px;
-    transition: background 0.2s, transform 0.15s;
+  /* ---------- LISTA CONTINENTES ---------- */
+  .continent-grid {
+    display: grid;
+    gap: 12px;
   }
 
-  .btn:hover { background: var(--azul-claro); }
-  .btn:active { transform: scale(0.97); }
-
-  /* ---------- VIDEO ---------- */
-  .video-wrap {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-top: 10px;
+  .continent-card {
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
   }
 
-  .video-wrap iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: 0;
+  .continent-card.verde { border-color: var(--verde); }
+  .continent-card.rojo { border-color: var(--rojo); }
+  .continent-card.amarillo { border-color: var(--amarillo); }
+  .continent-card.blanco { border-color: var(--blanco); }
+  .continent-card.azul { border-color: var(--azul); }
+
+  .continent-info h3 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
   }
 
-  /* ---------- FOOTER ---------- */
+  .continent-info p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  /* ---------- BOTÓN INSTALAR PWA ---------- */
+  #btn-instalar {
+    display: none;
+    position: fixed;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #d97706 100%);
+    color: #000;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    box-shadow: 0 8px 24px var(--accent-glow);
+    cursor: pointer;
+  }
+
   footer {
     text-align: center;
     font-size: 0.85rem;
-    color: var(--gris-suave);
-    padding: 24px 16px 40px;
-    font-style: italic;
+    color: var(--text-secondary);
+    padding: 32px 16px 40px;
   }
 
-  .emoji { font-size: 1.3rem; }
+  /* Ajustes móviles pequeños */
+  @media (max-width: 380px) {
+    header h1 { font-size: 1.9rem; }
+    .rosary-svg-wrap { max-width: 320px; }
+    .btn-action { padding: 11px 18px; font-size: 0.88rem; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🌍 Rosario Misionero del Mundo</h1>
-  <p>Una sola fe, una sola familia, una misma misión</p>
+  <div class="hero-content">
+    <span class="badge">Pastoral Familiar</span>
+    <h1>Rosario Misionero</h1>
+    <p>Una sola fe, una sola familia, una misma misión global</p>
+  </div>
 </header>
 
 <div class="container">
 
-  <!-- CÓMO REZAR -->
-  <div class="card" onclick="toggle(this)">
-    <h2><span class="emoji">🕊️</span> Cómo rezar</h2>
-    <p>Toca para ver la guía paso a paso</p>
-    <div class="contenido">
-      <ol style="padding-left: 20px;">
-        <li>Comienza con la Señal de la Cruz.</li>
-        <li>Reza el Credo, un Padre Nuestro y tres Avemarías.</li>
-        <li>En cada decena, menciona la intención del continente que te toca.</li>
-        <li>Reza un Padre Nuestro, diez Avemarías y un Gloria.</li>
-        <li>Al terminar las cinco decenas, reza la Oración final.</li>
-      </ol>
-      <p style="margin-top:10px;"><strong>Consejo:</strong> Pueden turnarse para dirigir cada decena.</p>
+  <!-- Imagen del Rosario -->
+  <div class="image-banner">
+    <img src="fondo-rosario.jpg" alt="Rosario Misionero del Mundo - Continentes y Cuentas">
+  </div>
+
+  <!-- GUIADOR INTERACTIVO DEL ROSARIO -->
+  <div class="rosary-player">
+    <div class="misterio-header">
+      <span class="tag" id="dia-semana">Misterios del Día</span>
+      <span style="font-size: 0.85rem; color: var(--text-secondary);" id="progreso-texto">1 / 5 Decena</span>
+    </div>
+
+    <h3 class="misterio-title" id="misterio-titulo">Decena 1</h3>
+
+    <div class="continent-indicator" id="continente-tag">
+      <div class="continent-dot" id="continente-color" style="background: var(--verde); color: var(--verde);"></div>
+      <span id="continente-nombre">África (Verde)</span>
+    </div>
+
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;" id="misterio-desc">
+      Oremos por la paz, la esperanza y la dignidad de los pueblos africanos.
+    </p>
+
+    <!-- ROSARIO EN SVG -->
+    <div class="rosary-svg-wrap">
+      <svg class="rosary-svg" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg" aria-label="Rosario misionero interactivo">
+        <!-- Hilo del rosario (anillo + cola) -->
+        <path id="rosary-thread-path" class="rosary-thread" d="" />
+
+        <!-- Grupo de cuentas generadas por JS -->
+        <g id="beads-layer"></g>
+
+        <!-- Medalla / cruz colgante al final de la cola -->
+        <g id="medal-group" transform="translate(150, 305)">
+          <circle class="medal" r="12" />
+          <line class="medal-cross" x1="0" y1="-7" x2="0" y2="7" />
+          <line class="medal-cross" x1="-5" y1="-2" x2="5" y2="-2" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Leyenda -->
+    <div class="rosary-legend">
+      <span><span class="legend-dot big"></span> Padre Nuestro</span>
+      <span><span class="legend-dot"></span> Avemaría</span>
+      <span><span class="legend-dot glow"></span> Cuenta activa</span>
+    </div>
+
+    <div class="player-controls">
+      <button class="btn-action btn-secondary" onclick="prevBead()">Anterior</button>
+      <button class="btn-action" onclick="nextBead()">Avanzar Cuenta 📿</button>
     </div>
   </div>
 
-  <!-- INTENCIONES -->
+  <!-- MISTERIOS Y DÍAS DE REZO -->
   <div class="card" onclick="toggle(this)">
-    <h2><span class="emoji">🙏</span> Intenciones por continente</h2>
-    <p>Los cinco colores del Rosario Misionero</p>
+    <h2><span class="icon">📖</span> Guía de Misterios por Días</h2>
+    <p>¿Qué misterio corresponde rezar hoy?</p>
     <div class="contenido">
-      <ul class="lista-intenciones">
-        <li style="border-left: 4px solid var(--verde);"><strong>Verde:</strong> África — Por la paz y la esperanza de sus pueblos.</li>
-        <li style="border-left: 4px solid var(--rojo);"><strong>Rojo:</strong> América — Por la unidad y la fe de las familias.</li>
-        <li style="border-left: 4px solid var(--amarillo);"><strong>Amarillo:</strong> Asia — Por los que aún no conocen a Cristo.</li>
-        <li style="border-left: 4px solid #ffffff; box-shadow: inset 0 0 0 1px #d1d5db;"><strong>Blanco:</strong> Europa — Por la renovación de la fe.</li>
-        <li style="border-left: 4px solid #2563eb;"><strong>Azul:</strong> Oceanía — Por los misioneros en las islas.</li>
-      </ul>
-    </div>
-  </div>
 
-  <!-- VIDEOS -->
-  <div class="card" onclick="toggle(this)">
-    <h2><span class="emoji">🎥</span> Videos y testimonios</h2>
-    <p>Mira cómo otras familias lo viven</p>
-    <div class="contenido">
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <div class="misterio-box">
+        <div class="misterio-box-header">
+          <span class="misterio-box-title">🌸 Misterios Gozosos</span>
+          <span class="misterio-days">Lunes y Sábado</span>
+        </div>
+        <ul class="misterio-list">
+          <li><span class="num">1.</span> La Encarnación del Hijo de Dios.</li>
+          <li><span class="num">2.</span> La Visitación de Nuestra Señora a su prima Isabel.</li>
+          <li><span class="num">3.</span> El Nacimiento del Hijo de Dios en Belén.</li>
+          <li><span class="num">4.</span> La Presentación del Niño Jesús en el Templo.</li>
+          <li><span class="num">5.</span> El Niño Jesús perdido y hallado en el Templo.</li>
+        </ul>
       </div>
-      <p style="margin-top:8px; font-size:0.85rem; color:#6b7280;">Reemplaza el enlace por el video de tu pastoral.</p>
+
+      <div class="misterio-box">
+        <div class="misterio-box-header">
+          <span class="misterio-box-title">✨ Misterios Luminosos</span>
+          <span class="misterio-days">Jueves</span>
+        </div>
+        <ul class="misterio-list">
+          <li><span class="num">1.</span> El Bautismo de Jesús en el Jordán.</li>
+          <li><span class="num">2.</span> La Autorrevelación en las bodas de Caná.</li>
+          <li><span class="num">3.</span> El Anuncio del Reino de Dios invitando a la conversión.</li>
+          <li><span class="num">4.</span> La Transfiguración de Jesús.</li>
+          <li><span class="num">5.</span> La Institución de la Eucaristía.</li>
+        </ul>
+      </div>
+
+      <div class="misterio-box">
+        <div class="misterio-box-header">
+          <span class="misterio-box-title">✝️ Misterios Dolorosos</span>
+          <span class="misterio-days">Martes y Viernes</span>
+        </div>
+        <ul class="misterio-list">
+          <li><span class="num">1.</span> La Oración de Jesús en el Huerto.</li>
+          <li><span class="num">2.</span> La Flagelación del Señor en la columna.</li>
+          <li><span class="num">3.</span> La Coronación de espinas.</li>
+          <li><span class="num">4.</span> Jesús con la Cruz a cuestas camino al Calvario.</li>
+          <li><span class="num">5.</span> La Crucifixión y Muerte de Nuestro Señor.</li>
+        </ul>
+      </div>
+
+      <div class="misterio-box">
+        <div class="misterio-box-header">
+          <span class="misterio-box-title">👑 Misterios Gloriosos</span>
+          <span class="misterio-days">Miércoles y Domingo</span>
+        </div>
+        <ul class="misterio-list">
+          <li><span class="num">1.</span> La Triunfante Resurrección del Señor.</li>
+          <li><span class="num">2.</span> La Ascensión del Señor al Cielo.</li>
+          <li><span class="num">3.</span> La Venida del Espíritu Santo sobre los Apóstoles.</li>
+          <li><span class="num">4.</span> La Asunción de la Santísima Virgen al Cielo.</li>
+          <li><span class="num">5.</span> La Coronación de la Santísima Virgen como Reina del Universo.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GUÍA CÓMO REZAR -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="icon">🕊️</span> Pasos para Rezar</h2>
+    <p>Guía rápida paso a paso</p>
+    <div class="contenido">
+      <ol style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+        <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Señal de la Cruz:</strong> Inicia persignándote.</li>
+        <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Credo y Primeras Oraciones:</strong> Reza 1 Credo, 1 Padre Nuestro y 3 Avemarías.</li>
+        <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Enunciar la Decena:</strong> Lee el misterio correspondiente e intenciona por el continente.</li>
+        <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">10 Avemarías y Gloria:</strong> Rezan 1 Padre Nuestro, 10 Avemarías y 1 Gloria.</li>
+        <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Oración Final:</strong> Cierra el rosario dando gracias por las misiones.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- INTENCIONES POR CONTINENTE -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="icon">🌍</span> Simbología y Colores</h2>
+    <p>Intención por cada continente</p>
+    <div class="contenido">
+      <div class="continent-grid">
+        <div class="continent-card verde">
+          <div class="continent-info">
+            <h3>🟢 Verde — África</h3>
+            <p>Por la esperanza, la paz y las misiones comunitarias en África.</p>
+          </div>
+        </div>
+        <div class="continent-card rojo">
+          <div class="continent-info">
+            <h3>🔴 Rojo — América</h3>
+            <p>Por la fe en las familias y el espíritu misionero en todo el continente.</p>
+          </div>
+        </div>
+        <div class="continent-card amarillo">
+          <div class="continent-info">
+            <h3>🟡 Amarillo — Asia</h3>
+            <p>Por la transmisión del Evangelio y la unidad de los pueblos de Asia.</p>
+          </div>
+        </div>
+        <div class="continent-card blanco">
+          <div class="continent-info">
+            <h3>⚪ Blanco — Europa</h3>
+            <p>Por el reencuentro con la fe y el liderazgo espiritual de los jóvenes.</p>
+          </div>
+        </div>
+        <div class="continent-card azul">
+          <div class="continent-info">
+            <h3>🔵 Azul — Oceanía</h3>
+            <p>Por los misioneros que navegan y sirven en miles de islas lejanas.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ORACIÓN FINAL -->
   <div class="card" onclick="toggle(this)">
-    <h2><span class="emoji">❤️</span> Oración final</h2>
-    <p>Para cerrar el Rosario Misionero</p>
+    <h2><span class="icon">✨</span> Oración Misionera Final</h2>
+    <p>Cierre del Rosario</p>
     <div class="contenido">
-      <p style="font-style: italic;">
-        "Señor Jesús, que nos enviaste a anunciar el Evangelio a todo el mundo,<br>
-        te pedimos por la intercesión de María,<br>
-        que nuestras familias sean misioneras en casa y fuera de ella.<br>
-        Amén."
+      <p style="font-style: italic; color: var(--text-secondary); text-align: center; font-size: 0.95rem;">
+        "Señor Jesús, que nos enviaste a anunciar el Evangelio a todas las naciones,<br><br>
+        te pedimos por intercesión de María que nuestras familias sean luz y misión en cada rincón de la Tierra.<br><br>
+        <strong>Amén.</strong>"
       </p>
-    </div>
-  </div>
-
-  <!-- MATERIALES -->
-  <div class="card" onclick="toggle(this)">
-    <h2><span class="emoji">📤</span> Materiales para compartir</h2>
-    <p>Descarga el separador y otros recursos</p>
-    <div class="contenido">
-      <p>Aquí puedes enlazar tu Google Drive con el PDF del separador, imágenes para redes y más.</p>
-      <a href="#" class="btn">📄 Descargar separador (PDF)</a>
     </div>
   </div>
 
 </div>
 
 <footer>
-  El mundo necesita nuestras oraciones…<br>
-  ¡y nuestra familia también! 🤍✝️
+  El mundo necesita nuestras oraciones… ¡y nuestra familia también! 🤍✝️
 </footer>
 
-<!-- Botón de instalación PWA -->
-<button id="btn-instalar">📲 Instalar app</button>
+<button id="btn-instalar">📲 Instalar App</button>
 
 <script>
-  // ---- Acordeón de tarjetas ----
   function toggle(el) {
     el.classList.toggle('abierto');
   }
 
-  // ---- Registro del Service Worker ----
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('SW registrado:', reg.scope))
-        .catch(err => console.error('Error SW:', err));
+  /* ============================================================
+     GEOMETRÍA DEL ROSARIO
+     ============================================================ */
+  const CX = 150;          // centro X del anillo
+  const CY = 150;          // centro Y del anillo
+  const RX = 105;          // radio X (óvalo)
+  const RY = 118;          // radio Y (óvalo)
+
+  // Cuentas del anillo: 5 grupos de (1 PN + 10 Ave) = 55 cuentas
+  // El anillo empieza en la parte inferior (6 en punto) y va en sentido horario.
+  // Vamos a construir la lista completa de cuentas del anillo con su tipo.
+  const beadsRing = []; // {tipo: 'pn'|'ave', decena: 0-4, indexInDecena: 0-9}
+
+  for (let d = 0; d < 5; d++) {
+    beadsRing.push({ tipo: 'pn', decena: d, idx: -1 }); // Padre Nuestro inicia cada decena
+    for (let i = 0; i < 10; i++) {
+      beadsRing.push({ tipo: 'ave', decena: d, idx: i });
+    }
+  }
+  // beadsRing.length === 55
+
+  // La cola: 1 PN grande + 3 Avemarías + medalla
+  const beadsTail = [
+    { tipo: 'pn', decena: -1, idx: -1 }, // cuenta PN inicial
+    { tipo: 'ave', decena: -1, idx: 0 },
+    { tipo: 'ave', decena: -1, idx: 1 },
+    { tipo: 'ave', decena: -1, idx: 2 }
+  ];
+
+  // Ángulo inicial: parte inferior del óvalo (90° en SVG = abajo)
+  const ANGLE_START = Math.PI / 2;
+  // Dirección horaria → restamos ángulo
+  const ANGLE_STEP = -(2 * Math.PI) / beadsRing.length;
+
+  function getRingPosition(i) {
+    const angle = ANGLE_START + i * ANGLE_STEP;
+    return {
+      x: CX + RX * Math.cos(angle),
+      y: CY + RY * Math.sin(angle)
+    };
+  }
+
+  // Posición de las cuentas de la cola (bajan desde la parte inferior del anillo)
+  const tailPositions = [
+    { x: CX, y: CY + RY + 28 },  // PN inicial
+    { x: CX, y: CY + RY + 48 },
+    { x: CX, y: CY + RY + 66 },
+    { x: CX, y: CY + RY + 84 }
+  ];
+
+  /* ============================================================
+     CONSTRUCCIÓN DEL SVG
+     ============================================================ */
+  const beadsLayer = document.getElementById('beads-layer');
+  const threadPath = document.getElementById('rosary-thread-path');
+
+  // Guardamos referencias a los elementos SVG de cada cuenta
+  const beadElements = []; // {el, tipo, decena, idx}
+
+  function buildRosary() {
+    // --- Hilo del anillo (óvalo) ---
+    let dRing = '';
+    for (let i = 0; i <= beadsRing.length; i++) {
+      const p = getRingPosition(i % beadsRing.length);
+      dRing += (i === 0 ? 'M' : 'L') + p.x.toFixed(2) + ' ' + p.y.toFixed(2) + ' ';
+    }
+    dRing += 'Z ';
+
+    // --- Hilo de la cola: baja desde la parte inferior del anillo ---
+    // La parte inferior del anillo está en (CX, CY+RY). Conectamos al PN inicial de la cola.
+    let dTail = `M ${CX} ${CY + RY} `;
+    tailPositions.forEach(p => {
+      dTail += `L ${p.x} ${p.y} `;
+    });
+    // Y de la última cuenta de la cola a la medalla
+    dTail += `L ${CX} ${305 - 14} `; // hasta el borde superior de la medalla
+
+    threadPath.setAttribute('d', dRing + dTail);
+
+    // --- Cuentas del anillo ---
+    beadsRing.forEach((b, i) => {
+      const p = getRingPosition(i);
+      const r = b.tipo === 'pn' ? 6.5 : 4.2;
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', p.x.toFixed(2));
+      circle.setAttribute('cy', p.y.toFixed(2));
+      circle.setAttribute('r', r);
+      circle.setAttribute('class', 'bead-svg' + (b.tipo === 'pn' ? ' bead-pn' : ''));
+      circle.dataset.decena = b.decena;
+      circle.dataset.tipo = b.tipo;
+      circle.dataset.idx = b.idx;
+      beadsLayer.appendChild(circle);
+      beadElements.push({ el: circle, tipo: b.tipo, decena: b.decena, idx: b.idx, zona: 'ring' });
+    });
+
+    // --- Cuentas de la cola ---
+    beadsTail.forEach((b, i) => {
+      const p = tailPositions[i];
+      const r = b.tipo === 'pn' ? 6.5 : 4.2;
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', p.x.toFixed(2));
+      circle.setAttribute('cy', p.y.toFixed(2));
+      circle.setAttribute('r', r);
+      circle.setAttribute('class', 'bead-svg' + (b.tipo === 'pn' ? ' bead-pn' : ''));
+      circle.dataset.decena = b.decena;
+      circle.dataset.tipo = b.tipo;
+      circle.dataset.idx = b.idx;
+      beadsLayer.appendChild(circle);
+      beadElements.push({ el: circle, tipo: b.tipo, decena: b.decena, idx: b.idx, zona: 'tail' });
     });
   }
 
-  // ---- Botón de instalación PWA ----
+  buildRosary();
+
+  /* ============================================================
+     LÓGICA DE PROGRESO
+     - currentDecena: 0-4
+     - currentBead: 0-10  (0 = aún no se reza ninguna Avemaría; 1-10 = Avemarías rezadas)
+       Nota: la cuenta PN se considera "activa" cuando empieza la decena.
+     ============================================================ */
+  let currentDecena = 0;
+  let currentBead = 0;
+
+  const continentes = [
+    { nombre: "África (Verde)", color: "var(--verde)", desc: "Oremos por la paz, la esperanza y la dignidad de los pueblos africanos." },
+    { nombre: "América (Rojo)", color: "var(--rojo)", desc: "Oremos por la unidad de las familias y el fortalecimiento de la fe en América." },
+    { nombre: "Asia (Amarillo)", color: "var(--amarillo)", desc: "Oremos por aquellos que aún no conocen a Cristo y por los pueblos de Asia." },
+    { nombre: "Europa (Blanco)", color: "var(--blanco)", desc: "Oremos por la renovación de la fe cristiana y la paz en el continente europeo." },
+    { nombre: "Oceanía (Azul)", color: "var(--azul)", desc: "Oremos por las comunidades cristianas y los misioneros en las islas de Oceanía." }
+  ];
+
+  const misteriosSemana = {
+    0: "Misterios Gloriosos (Domingo)",
+    1: "Misterios Gozosos (Lunes)",
+    2: "Misterios Dolorosos (Martes)",
+    3: "Misterios Gloriosos (Miércoles)",
+    4: "Misterios Luminosos (Jueves)",
+    5: "Misterios Dolorosos (Viernes)",
+    6: "Misterios Gozosos (Sábado)"
+  };
+
+  function updateUI() {
+    const today = new Date().getDay();
+    document.getElementById('dia-semana').innerText = misteriosSemana[today];
+    document.getElementById('misterio-titulo').innerText = `Decena ${currentDecena + 1}`;
+    document.getElementById('progreso-texto').innerText = `${currentDecena + 1} / 5 Decena`;
+
+    const cont = continentes[currentDecena];
+    document.getElementById('continente-nombre').innerText = cont.nombre;
+    document.getElementById('misterio-desc').innerText = cont.desc;
+
+    const dot = document.getElementById('continente-color');
+    dot.style.background = cont.color;
+    dot.style.color = cont.color;
+
+    // Propagar el color activo al rosario SVG
+    const svg = document.querySelector('.rosary-svg');
+    svg.style.setProperty('--bead-active-color', cont.color);
+
+    // Iluminar cuentas según el progreso
+    // Decena activa = currentDecena
+    // PN de esa decena se ilumina siempre que estemos en esa decena
+    // Avemarías 0..currentBead-1 se iluminan
+    beadElements.forEach(b => {
+      let activa = false;
+
+      if (b.zona === 'ring') {
+        if (b.decena === currentDecena) {
+          if (b.tipo === 'pn') {
+            activa = true; // el PN de la decena activa siempre encendido
+          } else if (b.tipo === 'ave') {
+            activa = b.idx < currentBead;
+          }
+        }
+        // Si ya pasamos esa decena, la dejamos apagada (para enfatizar la actual)
+        // Si aún no llegamos, apagada.
+      } else if (b.zona === 'tail') {
+        // La cola solo se ilumina al final (opcional: cuando se complete todo)
+        // La dejamos apagada por ahora.
+        activa = false;
+      }
+
+      if (activa) {
+        b.el.classList.add('active');
+      } else {
+        b.el.classList.remove('active');
+      }
+    });
+  }
+
+  function nextBead() {
+    if (currentBead < 10) {
+      currentBead++;
+    } else {
+      currentBead = 0;
+      if (currentDecena < 4) {
+        currentDecena++;
+      } else {
+        currentDecena = 0;
+        alert("¡Has completado las 5 decenas del Rosario Misionero! 🙏✨");
+      }
+    }
+    updateUI();
+  }
+
+  function prevBead() {
+    if (currentBead > 0) {
+      currentBead--;
+    } else if (currentDecena > 0) {
+      currentDecena--;
+      currentBead = 10;
+    }
+    updateUI();
+  }
+
+  // Inicializar UI
+  updateUI();
+
+  /* ============================================================
+     PWA
+     ============================================================ */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch(err => console.error(err));
+    });
+  }
+
   let deferredPrompt;
   const btnInstalar = document.getElementById('btn-instalar');
 
@@ -354,14 +984,7 @@
   btnInstalar.addEventListener('click', async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log('Resultado instalación:', outcome);
     deferredPrompt = null;
-    btnInstalar.style.display = 'none';
-  });
-
-  window.addEventListener('appinstalled', () => {
-    console.log('App instalada');
     btnInstalar.style.display = 'none';
   });
 </script>
