@@ -700,6 +700,64 @@
     font-weight: 700;
   }
 
+  /* ---------- ORACIONES ---------- */
+  .oracion-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .oracion-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .oracion-box.padre::before { background: var(--accent-gold); }
+  .oracion-box.ave::before { background: var(--azul); }
+  .oracion-box.gloria::before { background: var(--verde); }
+
+  .oracion-box-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .oracion-box-header .oracion-icon {
+    font-size: 1.4rem;
+  }
+
+  .oracion-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .oracion-box.padre .oracion-box-title { color: var(--accent-gold); }
+  .oracion-box.ave .oracion-box-title { color: var(--azul); }
+  .oracion-box.gloria .oracion-box-title { color: var(--verde); }
+
+  .oracion-texto {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  .oracion-texto strong {
+    color: var(--text-primary);
+    font-style: normal;
+  }
+
   /* ---------- LISTA CONTINENTES ---------- */
   .continent-grid {
     display: grid;
@@ -929,6 +987,68 @@
         <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">10 Avemarías y Gloria:</strong> Rezan 1 Padre Nuestro, 10 Avemarías y 1 Gloria.</li>
         <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Oración Final:</strong> Cierra el rosario dando gracias por las misiones.</li>
       </ol>
+    </div>
+  </div>
+
+  <!-- ORACIONES BÁSICAS -->
+  <div class="card" onclick="toggle(this)">
+    <h2><span class="icon">🙏</span> Oraciones Básicas</h2>
+    <p>Padre Nuestro, Dios te salve María y Gloria</p>
+    <div class="contenido">
+
+      <div class="oracion-box padre">
+        <div class="oracion-box-header">
+          <span class="oracion-icon">✝️</span>
+          <span class="oracion-box-title">Padre Nuestro</span>
+        </div>
+        <p class="oracion-texto">
+          <strong>Padre nuestro,</strong> que estás en el cielo,<br>
+          santificado sea tu Nombre;<br>
+          venga a nosotros tu Reino;<br>
+          hágase tu voluntad en la tierra como en el cielo.<br><br>
+          Danos hoy nuestro pan de cada día;<br>
+          perdona nuestras ofensas,<br>
+          como también nosotros perdonamos a los que nos ofenden;<br>
+          no nos dejes caer en la tentación,<br>
+          y líbranos del mal.<br><br>
+          <strong>Amén.</strong>
+        </p>
+      </div>
+
+      <div class="oracion-box ave">
+        <div class="oracion-box-header">
+          <span class="oracion-icon">🌹</span>
+          <span class="oracion-box-title">Dios te salve, María</span>
+        </div>
+        <p class="oracion-texto">
+          Dios te salve, María,<br>
+          llena eres de gracia,<br>
+          el Señor es contigo.<br>
+          Bendita tú eres entre todas las mujeres,<br>
+          y bendito es el fruto de tu vientre, Jesús.<br><br>
+          Santa María, Madre de Dios,<br>
+          ruega por nosotros, pecadores,<br>
+          ahora y en la hora de nuestra muerte.<br><br>
+          <strong>Amén.</strong>
+        </p>
+      </div>
+
+      <div class="oracion-box gloria">
+        <div class="oracion-box-header">
+          <span class="oracion-icon">✨</span>
+          <span class="oracion-box-title">Gloria al Padre</span>
+        </div>
+        <p class="oracion-texto">
+          Gloria al Padre,<br>
+          y al Hijo,<br>
+          y al Espíritu Santo.<br><br>
+          Como era en el principio,<br>
+          ahora y siempre,<br>
+          por los siglos de los siglos.<br><br>
+          <strong>Amén.</strong>
+        </p>
+      </div>
+
     </div>
   </div>
 
