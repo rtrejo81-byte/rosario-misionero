@@ -721,6 +721,7 @@
     border-radius: 4px 0 0 4px;
   }
 
+  .oracion-box.credo::before { background: #a855f7; }
   .oracion-box.padre::before { background: var(--accent-gold); }
   .oracion-box.ave::before { background: var(--azul); }
   .oracion-box.gloria::before { background: var(--verde); }
@@ -742,6 +743,7 @@
     font-weight: 700;
   }
 
+  .oracion-box.credo .oracion-box-title { color: #a855f7; }
   .oracion-box.padre .oracion-box-title { color: var(--accent-gold); }
   .oracion-box.ave .oracion-box-title { color: var(--azul); }
   .oracion-box.gloria .oracion-box-title { color: var(--verde); }
@@ -756,6 +758,66 @@
   .oracion-texto strong {
     color: var(--text-primary);
     font-style: normal;
+  }
+
+  /* ---------- ORDEN DE INICIO ---------- */
+  .orden-inicio-box {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .orden-inicio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .orden-inicio-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .orden-inicio-list li {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    line-height: 1.65;
+  }
+
+  .orden-inicio-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .orden-inicio-list .orden-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(245, 158, 11, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .orden-inicio-list strong {
+    color: var(--text-primary);
   }
 
   /* ---------- LISTA CONTINENTES ---------- */
@@ -980,6 +1042,28 @@
     <h2><span class="icon">🕊️</span> Pasos para Rezar</h2>
     <p>Guía rápida paso a paso</p>
     <div class="contenido">
+
+      <!-- ORDEN DE INICIO DEL ROSARIO -->
+      <div class="orden-inicio-box">
+        <div class="orden-inicio-title">
+          <span>🔱</span> Orden de inicio del Rosario
+        </div>
+        <ul class="orden-inicio-list">
+          <li>
+            <span class="orden-num">1</span>
+            <span><strong>Señal de la cruz:</strong> Se hace sobre el crucifijo del rosario.</span>
+          </li>
+          <li>
+            <span class="orden-num">2</span>
+            <span><strong>El Credo (Símbolo de los Apóstoles):</strong> Se reza en el crucifijo inicial como profesión de fe.</span>
+          </li>
+          <li>
+            <span class="orden-num">3</span>
+            <span><strong>Padre Nuestro, tres Avemarías y el Gloria:</strong> Se rezan en las cuentas siguientes antes de anunciar el primer misterio.</span>
+          </li>
+        </ul>
+      </div>
+
       <ol style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem;">
         <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Señal de la Cruz:</strong> Inicia persignándote.</li>
         <li style="margin-bottom: 8px;"><strong style="color:var(--text-primary)">Credo y Primeras Oraciones:</strong> Reza 1 Credo, 1 Padre Nuestro y 3 Avemarías.</li>
@@ -993,8 +1077,36 @@
   <!-- ORACIONES BÁSICAS -->
   <div class="card" onclick="toggle(this)">
     <h2><span class="icon">🙏</span> Oraciones Básicas</h2>
-    <p>Padre Nuestro, Dios te salve María y Gloria</p>
+    <p>Credo, Padre Nuestro, Dios te salve María y Gloria</p>
     <div class="contenido">
+
+      <div class="oracion-box credo">
+        <div class="oracion-box-header">
+          <span class="oracion-icon">📜</span>
+          <span class="oracion-box-title">Credo de los Apóstoles</span>
+        </div>
+        <p class="oracion-texto">
+          Creo en Dios, Padre todopoderoso,<br>
+          Creador del cielo y de la tierra.<br><br>
+          Creo en Jesucristo, su único Hijo, nuestro Señor,<br>
+          que fue concebido por obra y gracia del Espíritu Santo,<br>
+          nació de Santa María Virgen,<br>
+          padeció bajo el poder de Poncio Pilato,<br>
+          fue crucificado, muerto y sepultado,<br>
+          descendió a los infiernos,<br>
+          al tercer día resucitó de entre los muertos,<br>
+          subió a los cielos<br>
+          y está sentado a la derecha de Dios, Padre todopoderoso.<br>
+          Desde allí ha de venir a juzgar a vivos y muertos.<br><br>
+          Creo en el Espíritu Santo,<br>
+          la santa Iglesia católica,<br>
+          la comunión de los santos,<br>
+          el perdón de los pecados,<br>
+          la resurrección de la carne<br>
+          y la vida eterna.<br><br>
+          <strong>Amén.</strong>
+        </p>
+      </div>
 
       <div class="oracion-box padre">
         <div class="oracion-box-header">
